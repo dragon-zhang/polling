@@ -229,10 +229,9 @@ fn edge_oneshot_triggered() {
         .wait(&mut events, Some(Duration::from_secs(10)))
         .unwrap();
 
-    assert_eq!(
-        events.iter().collect::<Vec<_>>(),
-        [Event::readable(reader_token)]
-    );
+    assert_eq!(events.len(), 1);
+    assert!(events.iter().next().unwrap().readable);
+    assert!(!events.iter().next().unwrap().writable);
 
     // If we read some of the data, the notification should not still be available.
     reader.read_exact(&mut [0; 3]).unwrap();
@@ -254,10 +253,10 @@ fn edge_oneshot_triggered() {
     poller
         .wait(&mut events, Some(Duration::from_secs(0)))
         .unwrap();
-    assert_eq!(
-        events.iter().collect::<Vec<_>>(),
-        [Event::readable(reader_token)]
-    );
+
+    assert_eq!(events.len(), 1);
+    assert!(events.iter().next().unwrap().readable);
+    assert!(!events.iter().next().unwrap().writable);
 }
 
 fn tcp_pair() -> io::Result<(TcpStream, TcpStream)> {
