@@ -72,7 +72,7 @@ pub trait PollerIocpExt: PollerSealed {
     /// # Examples
     ///
     /// ```no_run
-    /// use polling::{Poller, Event, PollMode};
+    /// use polling::{Poller, Event, Events, PollMode};
     /// use polling::os::iocp::PollerIocpExt;
     ///
     /// use std::process::Command;
@@ -92,7 +92,7 @@ pub trait PollerIocpExt: PollerSealed {
     /// }
     ///
     /// // Wait for the child process to exit.
-    /// let mut events = vec![];
+    /// let mut events = Events::new();
     /// poller.wait(&mut events, None).unwrap();
     ///
     /// assert_eq!(events.len(), 1);
@@ -115,7 +115,7 @@ pub trait PollerIocpExt: PollerSealed {
     /// # Examples
     ///
     /// ```no_run
-    /// use polling::{Poller, Event, PollMode};
+    /// use polling::{Poller, Event, Events, PollMode};
     /// use polling::os::iocp::PollerIocpExt;
     ///
     /// use std::process::Command;
@@ -135,7 +135,7 @@ pub trait PollerIocpExt: PollerSealed {
     /// }
     ///
     /// // Wait for the child process to exit.
-    /// let mut events = vec![];
+    /// let mut events = Events::new();
     /// poller.wait(&mut events, None).unwrap();
     ///
     /// assert_eq!(events.len(), 1);
@@ -161,7 +161,7 @@ pub trait PollerIocpExt: PollerSealed {
     /// # Examples
     ///
     /// ```no_run
-    /// use polling::{Poller, Event, PollMode};
+    /// use polling::{Poller, Event, Events, PollMode};
     /// use polling::os::iocp::PollerIocpExt;
     ///
     /// use std::process::Command;
@@ -181,7 +181,7 @@ pub trait PollerIocpExt: PollerSealed {
     /// }
     ///
     /// // Wait for the child process to exit.
-    /// let mut events = vec![];
+    /// let mut events = Events::new();
     /// poller.wait(&mut events, None).unwrap();
     ///
     /// assert_eq!(events.len(), 1);
