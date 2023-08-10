@@ -19,7 +19,7 @@ pub trait PollerIocpExt: PollerSealed {
     /// # Examples
     ///
     /// ```rust
-    /// use polling::{Poller, Event};
+    /// use polling::{Poller, Event, Events};
     /// use polling::os::iocp::{CompletionPacket, PollerIocpExt};
     ///
     /// use std::thread;
@@ -39,7 +39,7 @@ pub trait PollerIocpExt: PollerSealed {
     /// });
     ///
     /// // Wait for the event.
-    /// let mut events = vec![];
+    /// let mut events = Events::new();
     /// poller.wait(&mut events, None)?;
     ///
     /// assert_eq!(events.len(), 1);
@@ -96,7 +96,7 @@ pub trait PollerIocpExt: PollerSealed {
     /// poller.wait(&mut events, None).unwrap();
     ///
     /// assert_eq!(events.len(), 1);
-    /// assert_eq!(events[0], Event::all(0));
+    /// assert_eq!(events.iter().next().unwrap(), Event::all(0));
     /// ```
     unsafe fn add_waitable(
         &self,
@@ -139,7 +139,7 @@ pub trait PollerIocpExt: PollerSealed {
     /// poller.wait(&mut events, None).unwrap();
     ///
     /// assert_eq!(events.len(), 1);
-    /// assert_eq!(events[0], Event::all(0));
+    /// assert_eq!(events.iter().next().unwrap(), Event::all(0));
     ///
     /// // Modify the waitable handle.
     /// poller.modify_waitable(&child, Event::readable(0), PollMode::Oneshot).unwrap();
@@ -185,7 +185,7 @@ pub trait PollerIocpExt: PollerSealed {
     /// poller.wait(&mut events, None).unwrap();
     ///
     /// assert_eq!(events.len(), 1);
-    /// assert_eq!(events[0], Event::all(0));
+    /// assert_eq!(events.iter().next().unwrap(), Event::all(0));
     ///
     /// // Remove the waitable handle.
     /// poller.remove_waitable(&child).unwrap();
